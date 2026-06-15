@@ -2,6 +2,8 @@
   "meta": {
     "title": "Lorenzo Limpido — DJ",
     "description": "DJ per club, festival ed eventi privati. Bra, Cuneo.",
+    "siteUrl": "https://www.lorenzolimpido.it",
+    "ogImage": "assets/images/foto_limpido.jpg",
     "accent": "#a78bfa",
     "accent2": "#22d3ee"
   },

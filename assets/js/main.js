@@ -78,8 +78,23 @@ async function init() {
   const meta = data.meta || {};
 
   // Meta e colori d'accento
-  document.title = meta.title || data.name || "Sito";
-  $("meta-description").setAttribute("content", meta.description || "");
+  const title = meta.title || data.name || "Sito";
+  const description = meta.description || "";
+  const siteUrl = (meta.siteUrl || "").replace(/\/$/, "");
+  const ogImagePath = meta.ogImage || data.photo || "";
+  const ogImage = ogImagePath && siteUrl
+    ? (ogImagePath.startsWith("http") ? ogImagePath : `${siteUrl}/${ogImagePath.replace(/^\//, "")}`)
+    : ogImagePath;
+
+  document.title = title;
+  $("meta-description").setAttribute("content", description);
+  if ($("og-title")) $("og-title").setAttribute("content", title);
+  if ($("og-description")) $("og-description").setAttribute("content", description);
+  if ($("og-url") && siteUrl) $("og-url").setAttribute("content", `${siteUrl}/`);
+  if ($("og-image") && ogImage) $("og-image").setAttribute("content", ogImage);
+  if ($("twitter-title")) $("twitter-title").setAttribute("content", title);
+  if ($("twitter-description")) $("twitter-description").setAttribute("content", description);
+  if ($("twitter-image") && ogImage) $("twitter-image").setAttribute("content", ogImage);
   if (meta.accent) document.documentElement.style.setProperty("--accent", meta.accent);
   if (meta.accent2) document.documentElement.style.setProperty("--accent-2", meta.accent2);
 
